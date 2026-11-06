@@ -1,0 +1,59 @@
+
+{% extends 'posts/base.html' %}
+
+{% block titulo %}Inicio - Mi Blog de Python{% endblock %}
+
+{% block contenido %}
+
+    {% for post in posts %}
+
+        <article class="tarjeta">
+
+            <h2>{{ post.titulo }}</h2>
+
+            <p class="fecha">
+                Por {{ post.autor.username }}
+                | {{ post.fecha_creacion|date:"d/m/Y" }}
+            </p>
+
+            {% if post.imagen %}
+                <img
+                    class="imagen-post"
+                    src="{{ post.imagen.url }}"
+                    alt="{{ post.titulo }}"
+                >
+            {% endif %}
+
+            <p>{{ post.contenido|truncatewords:40 }}</p>
+
+            <div class="acciones">
+
+                <a class="boton" href="{% url 'detalle_post' post.pk %}">
+                    Leer más
+                </a>
+
+                {% if user == post.autor %}
+
+                    <a class="boton" href="{% url 'editar_post' post.pk %}">
+                        Editar
+                    </a>
+
+                    <a class="boton" href="{% url 'eliminar_post' post.pk %}">
+                        Eliminar
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </article>
+
+    {% empty %}
+
+        <div class="tarjeta">
+            <p>Todavía no hay publicaciones disponibles.</p>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

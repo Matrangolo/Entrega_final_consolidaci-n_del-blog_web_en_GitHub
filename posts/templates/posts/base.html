@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block titulo %}Mi Blog de Python{% endblock %}</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            color: #212529;
+        }
+
+        header {
+            background-color: #212529;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 12px;
+        }
+
+        nav {
+            margin-top: 22px;
+        }
+
+        nav a, nav button {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 15px;
+        }
+
+        nav a:hover, nav button:hover {
+            text-decoration: underline;
+        }
+
+        nav form {
+            display: inline;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tarjeta {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tarjeta h2 {
+            margin-top: 0;
+        }
+
+        .imagen-post {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .fecha {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .boton {
+            display: inline-block;
+            background-color: #212529;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 5px 5px 0;
+        }
+
+        .boton:hover {
+            background-color: #444;
+        }
+
+        .formulario {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .formulario input,
+        .formulario textarea,
+        .formulario select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font: inherit;
+        }
+
+        .formulario input[type="checkbox"] {
+            display: inline;
+            width: auto;
+        }
+
+        .formulario label {
+            font-weight: bold;
+        }
+
+        .formulario p {
+            margin-bottom: 20px;
+        }
+
+        .formulario .helptext,
+        .formulario .helptext ul {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .errorlist {
+            color: #b91c1c;
+        }
+
+        .acciones {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            nav a, nav button {
+                display: inline-block;
+                margin: 6px;
+            }
+
+            .tarjeta {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Mi Blog de Python</h1>
+        <p>Desarrollado con Django</p>
+
+        <nav>
+            <a href="{% url 'lista_posts' %}">Inicio</a>
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'crear_post' %}">
+                    Crear publicación
+                </a>
+
+                <a href="{% url 'perfil' %}">
+                    Mi perfil
+                </a>
+
+                <span>Hola, {{ user.username }}</span>
+
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Iniciar sesión
+                </a>
+
+                <a href="{% url 'registro' %}">
+                    Registrarse
+                </a>
+
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

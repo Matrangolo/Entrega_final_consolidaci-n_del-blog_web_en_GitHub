@@ -1,0 +1,30 @@
+
+{% extends 'posts/base.html' %}
+
+{% block titulo %}{{ titulo }} - Mi Blog{% endblock %}
+
+{% block contenido %}
+
+<div class="tarjeta formulario">
+
+    <h2>{{ titulo }}</h2>
+
+    <p>Completá los datos de tu publicación.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ formulario.as_p }}
+
+        <button type="submit" class="boton">
+            Guardar publicación
+        </button>
+    </form>
+
+    <a href="{% url 'lista_posts' %}">
+        Cancelar
+    </a>
+
+</div>
+
+{% endblock %}

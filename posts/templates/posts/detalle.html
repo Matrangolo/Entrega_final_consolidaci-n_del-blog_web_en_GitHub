@@ -1,0 +1,49 @@
+
+{% extends 'posts/base.html' %}
+
+{% block titulo %}{{ post.titulo }} - Mi Blog{% endblock %}
+
+{% block contenido %}
+
+<article class="tarjeta">
+
+    <h2>{{ post.titulo }}</h2>
+
+    <p class="fecha">
+        Por {{ post.autor.username }}
+        | {{ post.fecha_creacion|date:"d/m/Y" }}
+    </p>
+
+    {% if post.imagen %}
+        <img
+            class="imagen-post"
+            src="{{ post.imagen.url }}"
+            alt="{{ post.titulo }}"
+        >
+    {% endif %}
+
+    <div>
+        {{ post.contenido|linebreaks }}
+    </div>
+
+    <div class="acciones">
+
+        {% if user == post.autor %}
+            <a class="boton" href="{% url 'editar_post' post.pk %}">
+                Editar
+            </a>
+
+            <a class="boton" href="{% url 'eliminar_post' post.pk %}">
+                Eliminar
+            </a>
+        {% endif %}
+
+        <a class="boton" href="{% url 'lista_posts' %}">
+            Volver al inicio
+        </a>
+
+    </div>
+
+</article>
+
+{% endblock %}

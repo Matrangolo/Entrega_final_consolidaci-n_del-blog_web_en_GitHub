@@ -1,0 +1,35 @@
+
+{% extends 'posts/base.html' %}
+
+{% block titulo %}Registrarse - Mi Blog{% endblock %}
+
+{% block contenido %}
+
+<div class="tarjeta formulario">
+
+    <h2>Crear una cuenta</h2>
+
+    <p>Registrate para crear tus propias publicaciones.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ formulario.as_p }}
+
+        <button type="submit" class="boton">
+            Registrarme
+        </button>
+    </form>
+
+    <p>
+        ¿Ya tenés una cuenta?
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    </p>
+
+    <a href="{% url 'lista_posts' %}">
+        Volver al blog
+    </a>
+
+</div>
+
+{% endblock %}
