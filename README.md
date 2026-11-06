@@ -1,4 +1,4 @@
-
+﻿
 # Blog de Python con Django
 
 Proyecto final de la Diplomatura de Python de Coderhouse.
@@ -38,7 +38,7 @@ El sistema cuenta con autenticación de usuarios, perfiles y carga opcional de i
 ### 1. Clonar el repositorio
 
 ```bash
-git clone URL_DEL_REPOSITORIO
+git clone https://github.com/Matrangolo/Entrega_final_consolidaci-n_del-blog_web_en_GitHub.git blog_python_coderhouse
 cd blog_python_coderhouse
 ```
 
@@ -127,3 +127,5 @@ http://127.0.0.1:8000/
 Valentín Matrangolo
 
 Proyecto desarrollado para la Diplomatura de Python de Coderhouse.
+
+
